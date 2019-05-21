@@ -1,4 +1,4 @@
-import { Parrot, PARROT_TYPES } from '../parrot';
+import { Parrot, PARROT_TYPES } from './parrot';
 
 describe("Parrot", function () {
     test("get speed of european parrot", function () {
