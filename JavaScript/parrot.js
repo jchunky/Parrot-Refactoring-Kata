@@ -1,38 +1,39 @@
 export const PARROT_TYPES = {
-    EUROPEAN:       'EUROPEAN',
-    AFRICAN:        'AFRICAN',
-    NORWEGIAN_BLUE: 'NORWEGIAN_BLUE',
+  EUROPEAN: "EUROPEAN",
+  AFRICAN: "AFRICAN",
+  NORWEGIAN_BLUE: "NORWEGIAN_BLUE"
 };
 
 export class Parrot {
-    constructor(type, numberOfCoconuts, voltage, isNailed) {
-        this.type = type;
-        this.numberOfCoconuts = numberOfCoconuts;
-        this.voltage = voltage;
-        this.isNailed = isNailed;
-    }
+  constructor(type, numberOfCoconuts, voltage, isNailed) {
+    this.type = type;
+    this.numberOfCoconuts = numberOfCoconuts;
+    this.voltage = voltage;
+    this.isNailed = isNailed;
+  }
 
-    getSpeed() {
-        switch (this.type) {
-            case PARROT_TYPES.EUROPEAN:
-                return this.getBaseSpeed();
-            case PARROT_TYPES.AFRICAN:
-                return Math.max(0, this.getBaseSpeed() - this.getLoadFactor() * this.numberOfCoconuts);
-            case PARROT_TYPES.NORWEGIAN_BLUE:
-                return (this.isNailed) ? 0 : this.getBaseSpeedWithVoltage(this.voltage);
-        }
-        throw new Error("Should be unreachable");
-    }
+  getSpeed() {
+    if (this.isNailed) return 0;
 
-    getBaseSpeedWithVoltage(voltage) {
-        return Math.min(24, voltage * this.getBaseSpeed());
+    switch (this.type) {
+      case PARROT_TYPES.EUROPEAN:
+        return this.european();
+      case PARROT_TYPES.AFRICAN:
+        return this.african();
+      case PARROT_TYPES.NORWEGIAN_BLUE:
+        return this.norwegianBlue();
     }
+  }
 
-    getLoadFactor() {
-        return 9;
-    }
+  european() {
+    return 12;
+  }
 
-    getBaseSpeed() {
-        return 12;
-    }
+  african() {
+    return Math.max(0, 12 - 9 * this.numberOfCoconuts);
+  }
+
+  norwegianBlue() {
+    return Math.min(24, this.voltage * 12);
+  }
 }
