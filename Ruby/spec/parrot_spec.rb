@@ -1,4 +1,4 @@
-require_relative '../lib/parrot'
+require_relative "../lib/parrot"
 
 describe "Parrots" do
   it "gets speed of a european parrot" do
