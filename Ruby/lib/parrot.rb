@@ -1,4 +1,5 @@
 require "delegate"
+require "active_support/all"
 
 class EuropeanParrot < SimpleDelegator
   def speed
@@ -28,10 +29,6 @@ class Parrot < Struct.new(:type, :number_of_coconuts, :voltage, :nailed)
   private
 
   def parrot_type
-    case type
-    when :european_parrot then EuropeanParrot
-    when :african_parrot then AfricanParrot
-    when :norwegian_blue_parrot then NorwegianBlueParrot
-    end.new(self)
+    type.to_s.classify.constantize.new(self)
   end
 end
