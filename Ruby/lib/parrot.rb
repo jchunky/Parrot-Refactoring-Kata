@@ -1,4 +1,3 @@
-require "delegate"
 require "active_support/all"
 
 class EuropeanParrot < SimpleDelegator
