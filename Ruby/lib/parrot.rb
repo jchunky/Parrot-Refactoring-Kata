@@ -15,12 +15,14 @@ end
 
 class NorwegianBlueParrot < SimpleDelegator
   def speed
-    nailed ? 0 : [24, voltage * 12].min
+    [24, voltage * 12].min
   end
 end
 
 class Parrot < Struct.new(:type, :number_of_coconuts, :voltage, :nailed)
   def speed
+    return 0 if nailed
+
     parrot_type.speed
   end
 
