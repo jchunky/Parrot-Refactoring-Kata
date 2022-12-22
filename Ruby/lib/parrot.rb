@@ -1,35 +1,30 @@
-class Parrot
-  def initialize type, number_of_coconuts, voltage, nailed
-    @type = type;
-    @number_of_coconuts = number_of_coconuts;
-    @voltage = voltage;
-    @nailed = nailed;
+require "active_support/all"
+require "delegate"
+
+class Parrot < Struct.new(:type, :number_of_coconuts, :voltage, :nailed)
+  def self.build(type, *args)
+    type.to_s.classify.constantize.new(type, *args)
   end
 
+  def round(value)
+    value.round(2)
+  end
+end
+
+class EuropeanParrot < Parrot
   def speed
-    case @type
-    when :european_parrot
-      return base_speed
-    when :african_parrot
-      return [0, base_speed - load_factor * @number_of_coconuts].max
-    when :norwegian_blue_parrot
-      return (@nailed) ? 0 : compute_base_speed_for_voltage(@voltage);
-    end
-
-    throw "Should be unreachable!";
+    12
   end
+end
 
-  private
-
-  def compute_base_speed_for_voltage voltage
-   [24.0, voltage * base_speed].min
+class AfricanParrot < Parrot
+  def speed
+    round([0, 12 - (9 * number_of_coconuts)].max)
   end
+end
 
-  def load_factor
-    9.0;
+class NorwegianBlueParrot < Parrot
+  def speed
+    nailed ? 0 : [24, voltage * 12].min
   end
-
-  def base_speed
-    12.0;
-  end  
 end
