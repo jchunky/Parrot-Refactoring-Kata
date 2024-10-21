@@ -5,6 +5,8 @@ Parrot = Data.define(:type, :number_of_coconuts, :voltage, :nailed) do
     base_speed.clamp(0, 24)
   end
 
+  private
+
   def base_speed
     case type
     when :european_parrot then 12
