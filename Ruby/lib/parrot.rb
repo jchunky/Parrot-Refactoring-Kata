@@ -9,8 +9,8 @@ Parrot = Data.define(:type, :number_of_coconuts, :voltage, :nailed) do
 
   def base_speed
     case type
-    when :european_parrot       then 12
-    when :african_parrot        then 12 - (9 * number_of_coconuts)
+    when :european_parrot then 12
+    when :african_parrot then 12 - (9 * number_of_coconuts)
     when :norwegian_blue_parrot then voltage * 12
     else raise "Unknown type: #{type}"
     end
